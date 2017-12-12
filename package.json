@@ -1,0 +1,22 @@
+{
+  "name": "html-linter",
+  "version": "1.0.0",
+  "description": "A linter to check formatting of html files",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "keywords": [
+    "html-linter",
+    "template-linter"
+  ],
+  "author": "Heather Roberts",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.58",
+    "typescript": "^2.6.2",
+    "ts-node": "^4.0.1"
+  }
+}
