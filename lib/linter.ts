@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { Indentation } from './validators/indentation';
 import { Attributes } from './validators/attributes';
 import { HtmlLinterConfig } from './interfaces/config';
+import * as glob from 'glob';
 
 export class Linter {
 
@@ -10,27 +11,34 @@ export class Linter {
       const errors: string[] = [];
       const filePaths = config.files;
       let lintedCount = 0;
-
-      if (filePaths.length === 0) {
-        reject('No files to lint');
+      if (!Array.isArray(filePaths)) {
+        reject('files must be an array of file paths to lint (glob patterns are allowed)');
       } else {
-        filePaths.forEach(filePath => {
-          fs.readFile(filePath, (error, data) => {
-            if (error) {
-              reject(error.toString());
-            } else {
-              const fileString = data.toString();
-              const lines = fileString.split('\n');
+        if (filePaths.length === 0) {
+          reject('No files to lint');
+        } else {
+          filePaths.forEach(filePath => {
+            glob(filePath, (error, files) => {
+              files.forEach(file => {
+                fs.readFile(file, (error, data) => {
+                  if (error) {
+                    reject(error.toString());
+                  } else {
+                    const fileString = data.toString();
+                    const lines = fileString.split('\n');
 
-              errors.push(...Indentation.validate(filePath, lines));
-              errors.push(...Attributes.validate(filePath, lines));
+                    errors.push(...Indentation.validate(file, lines));
+                    errors.push(...Attributes.validate(file, lines));
 
-              if (++lintedCount === filePaths.length) {
-                resolve(errors);
-              }
-            }
+                    if (++lintedCount === filePaths.length) {
+                      resolve(errors);
+                    }
+                  }
+                });
+              });
+            });
           });
-        });
+        }
       }
     });
   }

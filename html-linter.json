@@ -1,5 +1,13 @@
 {
   "files": [
-    "test.html"
-  ]
+    "**/*.html"
+  ],
+  "indentation": {
+    "char": "space",
+    "number": 2
+  },
+  "attributes": {
+    "quotes": "double",
+    "whitespace": 0
+  }
 }
