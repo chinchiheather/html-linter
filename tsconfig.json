@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "lib",
     "declaration": true,
     "removeComments": true,
     "sourceMap": true,
@@ -9,7 +9,6 @@
       "dom"
     ],
     "moduleResolution": "node",
-    "outDir": "./dist",
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"

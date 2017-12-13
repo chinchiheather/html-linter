@@ -1,14 +1,14 @@
 import * as fs from 'fs';
 import { Indentation } from './validators/indentation';
-import { AttrQuotes } from './validators/attributes/attr-quotes';
-import { AttrWhitespace } from './validators/attributes/attr-whitespace';
 import { Attributes } from './validators/attributes';
+import { HtmlLinterConfig } from './interfaces/config';
 
 export class Linter {
 
-  static lint(filePaths: string[]): Promise<string[]> {
+  static lint(config: HtmlLinterConfig): Promise<string[]> {
     return new Promise((resolve, reject) => {
       const errors: string[] = [];
+      const filePaths = config.files;
       let lintedCount = 0;
 
       if (filePaths.length === 0) {

@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "A linter to check formatting of html files",
   "bin": {
-    "html-linter": "dist/index.js"
+    "html-linter": "bin/html-linter"
   },
   "scripts": {
-    "start": "ts-node index.ts",
-    "compile": "rm -rf dist && tsc"
+    "start": "npm run compile && npm run lint",
+    "compile": "tsc",
+    "lint": "node bin/html-linter --config html-linter.json"
   },
   "keywords": [
     "html-linter",
@@ -16,7 +17,8 @@
   "author": "Heather Roberts",
   "license": "ISC",
   "dependencies": {
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
+    "commander": "^2.12.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.58",
