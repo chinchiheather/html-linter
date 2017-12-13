@@ -1,12 +1,13 @@
-export class AttrQuotes {
+export class AttrWhitespace {
 
-  static errorMsg = 'Attributes should use single quotes';
+  static errorMsg = `Attributes should have no whitespace around '=' character`;
 
   static validate(filePath: string, lines: string[]): string[] {
     const errors: string[] = [];
 
-    // todo: configure which quotes
-    const quote = `"`;
+    // todo: configure
+    const whitespace = 0;
+
     const attrRegex = /(\S+)\s?=\s?["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g;
 
     lines.forEach((line: string, idx: number) => {
@@ -14,9 +15,10 @@ export class AttrQuotes {
       if (attrMatches) {
         attrMatches.forEach(attrMatch => {
           const split = attrMatch.split('=');
-          const attrQuote = split[1].replace(/\s/g, '').charAt(0);
-          if (attrQuote !== quote) {
-            errors.push(`${filePath}:${idx + 1} ${AttrQuotes.errorMsg}`);
+          const before = split[0].match(/\s+$/);
+          const after = split[1].match(/^\s+/);
+          if (before || after) {
+            errors.push(`${filePath}:${idx + 1} ${AttrWhitespace.errorMsg}`);
           }
         });
       }
