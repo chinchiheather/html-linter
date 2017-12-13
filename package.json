@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A linter to check formatting of html files",
   "bin": {
-    "html-linter": "bin/html-linter.js"
+    "html-linter": "./bin/html-linter.js"
   },
   "scripts": {
     "start": "npm run compile && npm run lint",
