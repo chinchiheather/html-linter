@@ -2,8 +2,12 @@
   "name": "html-linter",
   "version": "1.0.0",
   "description": "A linter to check formatting of html files",
+  "bin": {
+    "html-linter": "dist/index.js"
+  },
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "compile": "rm -rf dist && tsc"
   },
   "keywords": [
     "html-linter",
@@ -16,7 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.58",
-    "typescript": "^2.6.2",
-    "ts-node": "^4.0.1"
+    "ts-node": "^4.0.1",
+    "typescript": "^2.6.2"
   }
 }

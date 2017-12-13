@@ -2,7 +2,7 @@ export class AttrQuotes {
 
   static errorMsg = 'Attributes should use single quotes';
 
-  static validate(attr: string): string[] {
+  static validate(attr: string): boolean {
     // todo: configure
     const quote = `"`;
 

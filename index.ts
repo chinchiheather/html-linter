@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as colors from 'colors';
 import { Linter } from './src/linter';
 

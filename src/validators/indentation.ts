@@ -9,17 +9,14 @@ export class Indentation {
 
     let prevStartIdx = 0;
     lines.forEach((line: string, idx: number) => {
-      let startIdx = line.search(/\S/);
+      let startIdx = line.search(/</);
       if (startIdx !== -1) {
         const diff = Math.abs(prevStartIdx - startIdx);
         if (diff !== indentation && diff !== 0) {
           errors.push(`${filePath}:${idx + 1} ${Indentation.errorMsg}`);
         }
-      } else {
-        startIdx = 0;
+        prevStartIdx = startIdx;
       }
-
-      prevStartIdx = startIdx;
     });
 
     return errors;

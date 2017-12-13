@@ -11,24 +11,27 @@ export class Linter {
       const errors: string[] = [];
       let lintedCount = 0;
 
-      filePaths.forEach(filePath => {
-        fs.readFile(filePath, (error, data) => {
-          if (error) {
-            reject(error.toString());
-          } else {
-            const fileString = data.toString();
-            const lines = fileString.split('\n');
+      if (filePaths.length === 0) {
+        reject('No files to lint');
+      } else {
+        filePaths.forEach(filePath => {
+          fs.readFile(filePath, (error, data) => {
+            if (error) {
+              reject(error.toString());
+            } else {
+              const fileString = data.toString();
+              const lines = fileString.split('\n');
 
-            // todo: centralise the way error messages set the file & line no
-            errors.push(...Indentation.validate(filePath, lines));
-            errors.push(...Attributes.validate(filePath, lines));
+              errors.push(...Indentation.validate(filePath, lines));
+              errors.push(...Attributes.validate(filePath, lines));
 
-            if (++lintedCount === filePaths.length) {
-              resolve(errors);
+              if (++lintedCount === filePaths.length) {
+                resolve(errors);
+              }
             }
-          }
+          });
         });
-      });
+      }
     });
   }
 
