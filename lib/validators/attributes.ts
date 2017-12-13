@@ -12,10 +12,10 @@ export class Attributes {
       const attrMatches = line.match(attrRegex);
       if (attrMatches) {
         attrMatches.forEach(attrMatch => {
-          if (!AttrWhitespace.validate(attrMatch, config.whitespace)) {
+          if (config.whitespace != null && !AttrWhitespace.validate(attrMatch, config.whitespace)) {
             errors.push(`${filePath}:${idx + 1} Attributes should have ${config.whitespace} whitespace around '=' character`);
           }
-          if (!AttrQuotes.validate(attrMatch, config.quotes)) {
+          if (config.quotes && !AttrQuotes.validate(attrMatch, config.quotes)) {
             errors.push(`${filePath}:${idx + 1} Attributes should use ${config.quotes} quotes`);
           }
         });

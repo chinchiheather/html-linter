@@ -16,7 +16,7 @@ if (!configFilePath) {
     if (error) {
       console.log(`Error loading config file ${configFilePath}`);
     } else {
-      const configJson = {...JSON.parse(data.toString())};
+      const configJson = JSON.parse(data.toString());
       Linter.lint(configJson)
         .then(errors => {
           if (errors.length === 0) {
