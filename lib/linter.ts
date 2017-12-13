@@ -27,8 +27,8 @@ export class Linter {
                     const fileString = data.toString();
                     const lines = fileString.split('\n');
 
-                    errors.push(...Indentation.validate(file, lines));
-                    errors.push(...Attributes.validate(file, lines));
+                    errors.push(...Indentation.validate(file, lines, config.indentation));
+                    errors.push(...Attributes.validate(file, lines, config.attributes));
 
                     if (++lintedCount === filePaths.length) {
                       resolve(errors);

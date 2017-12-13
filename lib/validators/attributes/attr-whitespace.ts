@@ -1,15 +1,17 @@
 export class AttrWhitespace {
 
-  static errorMsg = `Attributes should have no whitespace around '=' character`;
-
-  static validate(attr: string): boolean {
-    // todo: configure
-    const whitespace = 0;
-
+  static validate(attr: string, whitespace: number): boolean {
     const split = attr.split('=');
     const before = split[0].match(/\s+$/);
     const after = split[1].match(/^\s+/);
 
-    return !before && !after;
+    let valid: boolean;
+    if (whitespace === 0) {
+      valid = !before && !after;
+    } else {
+      valid = before && before.length === whitespace && after && after.length === whitespace;
+    }
+
+    return valid;
   }
 }

@@ -1,11 +1,13 @@
 export interface HtmlLinterConfig {
     files: string[];
-    indentation: {
-        char: 'space' | 'tab';
-        number: number;
-    };
-    attributes: {
-        quotes: 'single' | 'double';
-        whitespace: number;
-    };
+    indentation: IndentationConfig;
+    attributes: AttributesConfig;
+}
+export interface IndentationConfig {
+    char: 'space' | 'tab';
+    number: number;
+}
+export interface AttributesConfig {
+    quotes: 'single' | 'double';
+    whitespace: number;
 }

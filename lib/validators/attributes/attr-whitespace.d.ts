@@ -1,4 +1,3 @@
 export declare class AttrWhitespace {
-    static errorMsg: string;
-    static validate(attr: string): boolean;
+    static validate(attr: string, whitespace: number): boolean;
 }
