@@ -1,24 +1,21 @@
-export class AttrWhitespace {
+import { AttrWhitespace } from './attributes/attr-whitespace';
+import { AttrQuotes } from './attributes/attr-quotes';
 
-  static errorMsg = `Attributes should have no whitespace around '=' character`;
+export class Attributes {
 
   static validate(filePath: string, lines: string[]): string[] {
     const errors: string[] = [];
 
-    // todo: configure
-    const whitespace = 0;
-
     const attrRegex = /(\S+)\s?=\s?["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g;
-
     lines.forEach((line: string, idx: number) => {
       const attrMatches = line.match(attrRegex);
       if (attrMatches) {
         attrMatches.forEach(attrMatch => {
-          const split = attrMatch.split('=');
-          const before = split[0].match(/\s+$/);
-          const after = split[1].match(/^\s+/);
-          if (before || after) {
+          if (!AttrWhitespace.validate(attrMatch)) {
             errors.push(`${filePath}:${idx + 1} ${AttrWhitespace.errorMsg}`);
+          }
+          if (!AttrQuotes.validate(attrMatch)) {
+            errors.push(`${filePath}:${idx + 1} ${AttrQuotes.errorMsg}`);
           }
         });
       }
