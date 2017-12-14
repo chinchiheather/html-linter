@@ -22,10 +22,10 @@ export class Attributes {
         if (attrMatches) {
           attrMatches.forEach(attrMatch => {
             if (config.whitespace != null && !AttrWhitespace.validate(attrMatch, config.whitespace)) {
-              errors.push(`${filePath}:${idx + 1} Attributes should have ${config.whitespace} whitespace around '=' character`);
+              errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should have ${config.whitespace} whitespace around '=' character`);
             }
             if (config.quotes && !AttrQuotes.validate(attrMatch, config.quotes)) {
-              errors.push(`${filePath}:${idx + 1} Attributes should use ${config.quotes} quotes`);
+              errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should use ${config.quotes} quotes`);
             }
           });
         }

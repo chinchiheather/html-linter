@@ -14,7 +14,7 @@ export class Indentation {
         const diff = Math.abs(prevStartIdx - startIdx);
         const whitespaceStr = line.substring(0, startIdx);
         if (diff !== config.number && diff !== 0 || !whitespaceRegex.test(whitespaceStr)) {
-          errors.push(`${filePath}:${idx + 1} File should use ${config.number} ${config.char} indentation`);
+          errors.push(`ERROR: ${filePath}[${idx + 1}]: File should use ${config.number} ${config.char} indentation`);
         }
         prevStartIdx = startIdx;
       }
