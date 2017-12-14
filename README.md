@@ -19,6 +19,11 @@ npm install --save-dev html-linter
 ```
 The --config flag is required and should be the path to the configuration file for html-linter
 
+If you want to specify the files to lint in the command line, pass these as arguments and they will override the files property in the config file
+```
+html-linter --config path-to-html-linter-config.json file1.html dir/**/*.html
+```
+
 
 ## Configuration
 You need to pass in a json configuration file that specifies the rules you want to enforce  
