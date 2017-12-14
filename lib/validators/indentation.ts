@@ -8,8 +8,9 @@ export class Indentation {
 
     let prevStartIdx = 0;
     lines.forEach((line: string, idx: number) => {
-      let startIdx = line.search(/</);
-      if (startIdx !== -1) {
+      let tagIdx = line.search(/<(?!\/)/);
+      if (tagIdx !== -1) {
+        const startIdx = line.search(/\S/);
         const diff = Math.abs(prevStartIdx - startIdx);
         const whitespaceStr = line.substring(0, startIdx);
         if (diff !== config.number && diff !== 0 || !whitespaceRegex.test(whitespaceStr)) {
