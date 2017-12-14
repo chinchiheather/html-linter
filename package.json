@@ -1,6 +1,6 @@
 {
   "name": "html-linter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A linter to check formatting of html files",
   "bin": {
     "html-linter": "./bin/html-linter.js"
