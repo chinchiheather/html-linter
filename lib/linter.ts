@@ -6,10 +6,10 @@ import * as glob from 'glob';
 
 export class Linter {
 
-  static lint(config: HtmlLinterConfig): Promise<string[]> {
+  static lint(config: HtmlLinterConfig, fileList: string[]): Promise<string[]> {
     return new Promise((resolve, reject) => {
       const errors: string[] = [];
-      const filePaths = config.files;
+      const filePaths = fileList || config.files;
       if (!Array.isArray(filePaths)) {
         reject('files must be an array of file paths to lint (glob patterns are allowed)');
       } else {

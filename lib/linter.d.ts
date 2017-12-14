@@ -1,4 +1,4 @@
 import { HtmlLinterConfig } from './interfaces/config';
 export declare class Linter {
-    static lint(config: HtmlLinterConfig): Promise<string[]>;
+    static lint(config: HtmlLinterConfig, fileList: string[]): Promise<string[]>;
 }
