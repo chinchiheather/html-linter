@@ -7,7 +7,7 @@ export class Attributes {
   static validate(filePath: string, lines: string[], config: AttributesConfig): string[] {
     const errors: string[] = [];
 
-    const attrRegex = /(\S+)\s?[^(!=)]=\s?["']+((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g;
+    const attrRegex = /(\S+)\s*[^(!=)]=\s*["']+((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g;
     let inScriptTag = false;
     lines.forEach((line: string, idx: number) => {
       // don't want to check contents of script tags
