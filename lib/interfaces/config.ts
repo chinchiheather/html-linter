@@ -12,4 +12,5 @@ export interface IndentationConfig {
 export interface AttributesConfig {
   quotes: 'single' | 'double';
   whitespace: number;
+  'vertical-align': boolean;
 }

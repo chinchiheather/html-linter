@@ -8,6 +8,7 @@
   },
   "attributes": {
     "quotes": "double",
-    "whitespace": 0
+    "whitespace": 0,
+    "vertical-align": true
   }
 }

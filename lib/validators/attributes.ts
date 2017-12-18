@@ -7,8 +7,9 @@ export class Attributes {
   static validate(filePath: string, lines: string[], config: AttributesConfig): string[] {
     const errors: string[] = [];
 
-    const attrRegex = /(\S+)\s*[^(!=)]=\s*["']+/g;
+    const attrRegex = /(\S+)(\s|[\w\)\]])=\s*["']+/g;
     let inScriptTag = false;
+    let currentIdentation = -1;
     lines.forEach((line: string, idx: number) => {
       // don't want to check contents of script tags
       if (inScriptTag) {
@@ -28,6 +29,18 @@ export class Attributes {
               errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should use ${config.quotes} quotes`);
             }
           });
+
+          if (config['vertical-align']) {
+            const firstAttrIdx = line.search(attrRegex);
+            const substring = line.substring(0, firstAttrIdx);
+            if (/<[a-zA-Z0-9-]+\s$/.test(substring)) {
+              currentIdentation = firstAttrIdx;
+            } else {
+              if (currentIdentation !== firstAttrIdx) {
+                errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should vertically align`);
+              }
+            }
+          }
         }
       }
     });
