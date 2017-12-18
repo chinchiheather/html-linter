@@ -1,6 +1,7 @@
 import { AttrWhitespace } from './attributes/attr-whitespace';
 import { AttrQuotes } from './attributes/attr-quotes';
 import { AttributesConfig } from '../interfaces/config';
+import { AttrVerticalAlign } from './attributes/attr-vertical-align';
 
 export class Attributes {
 
@@ -29,16 +30,17 @@ export class Attributes {
               errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should use ${config.quotes} quotes`);
             }
           });
+        }
 
-          if (config['vertical-align']) {
-            const firstAttrIdx = line.search(attrRegex);
-            const substring = line.substring(0, firstAttrIdx);
-            if (/<[a-zA-Z0-9-]+\s$/.test(substring)) {
-              currentIdentation = firstAttrIdx;
-            } else {
-              if (currentIdentation !== firstAttrIdx) {
-                errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should vertically align`);
-              }
+        if (config['vertical-align']) {
+          if (AttrVerticalAlign.getIndentation(line)) {
+            currentIdentation = AttrVerticalAlign.getIndentation(line);
+          } else if (currentIdentation !== -1) {
+            if (currentIdentation !== line.search(/\S/)) {
+              errors.push(`ERROR: ${filePath}[${idx + 1}]: Attributes should vertically align`);
+            }
+            if (line.indexOf(`>`) !== -1) {
+              currentIdentation = -1;
             }
           }
         }
