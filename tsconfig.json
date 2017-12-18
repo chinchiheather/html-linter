@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "lib",
-    "declaration": true,
-    "removeComments": true,
-    "sourceMap": true,
     "lib": [
       "es2016",
       "dom"
