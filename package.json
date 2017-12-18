@@ -1,6 +1,6 @@
 {
   "name": "html-linter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A linter to check formatting of html files",
   "bin": {
     "html-linter": "./bin/html-linter.js"
@@ -16,6 +16,10 @@
   ],
   "author": "Heather Roberts",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinchiheather/html-linter.git"
+  },
   "dependencies": {
     "colors": "^1.1.2",
     "commander": "^2.12.2",
