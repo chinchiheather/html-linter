@@ -39,5 +39,6 @@ indentation: {
 attributes: {
   quotes: 'single' | 'double';        // quote character that attribute values should use
   whitespace: number;                 // number of whitespace characters there should be around the '=' character
+  vertical-align: boolean;            // whether attributes should align vertically
 };
 ```
