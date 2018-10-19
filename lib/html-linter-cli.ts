@@ -8,7 +8,7 @@ const program = commander
   .version('1.0.0')
   .option('--config [filePath]', 'config file')
   .arguments('[fileList...]')
-  .action((args: string[]) => fileList = args)
+  .action((args: string[]) => fileList = args.length > 0 ? args : undefined)
   .parse(process.argv);
 
 const configFilePath = program.config;
