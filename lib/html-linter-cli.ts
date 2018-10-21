@@ -1,7 +1,8 @@
-import * as colors from 'colors';
+import chalk from 'chalk';
 import { Linter } from './linter';
 import * as commander from 'commander';
 import * as fs from 'fs';
+import Logger from './utils/logger';
 
 let fileList: string[];
 const program = commander
@@ -21,23 +22,22 @@ if (!configFilePath) {
     } else {
       const configJson = JSON.parse(data.toString());
       Linter.lint(configJson, fileList)
-        .then(errors => {
-          if (errors.length === 0) {
-            console.log(colors.green('All files pass linting'));
+        .then(numErrors => {
+          if (numErrors === 0) {
+            process.exit(0);
           } else {
-            errors.forEach(errorMsg => console.log(errorMsg));
             process.exit(1);
           }
         })
         .catch(error => {
-          onError(colors.red(error.toString()));
+          onError(chalk.red(error.toString()));
         });
     }
   });
 }
 
 function onError(error: string) {
-  console.log(colors.red(error));
+  Logger.log(chalk.red(error));
   process.exit(1);
 }
 
