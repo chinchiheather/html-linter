@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "lib",
+    "outDir": "dist",
     "lib": [
       "es2016",
       "dom"
