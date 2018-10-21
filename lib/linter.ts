@@ -23,11 +23,11 @@ export class Linter {
             promises.push(this.checkFile(filePath, config));
           });
           Promise.all(promises).then((results) => {
-            const numErrors = results.reduce((prev, curr) => prev + (curr && curr.length || 0), 0);
-            if (numErrors === 0) {
+            const totalLintErrors = results.reduce((prev, curr) => prev + curr, 0);
+            if (totalLintErrors === 0) {
               Logger.log(chalk.green('All files pass linting'));
             }
-            resolve(numErrors);
+            resolve(totalLintErrors);
           });
         }
       }
@@ -45,9 +45,9 @@ export class Linter {
           }]);
         } else {
           let filesRead = 0;
+          let lintErrors = 0;
           files.forEach(file => {
             fs.readFile(file, (error, data) => {
-              const errors: Validation[] = [];
               if (error) {
                 Logger.logResults(file, [{
                   line: 0,
@@ -55,6 +55,7 @@ export class Linter {
                   message: error.toString()
                 }]);
               } else {
+                const errors: Validation[] = [];
                 const fileString = data.toString();
                 const lines = fileString.split('\n');
 
@@ -66,12 +67,13 @@ export class Linter {
                 }
 
                 if (errors.length > 0) {
+                  lintErrors += errors.length;
                   Logger.logResults(file, errors);
                 }
               }
 
               if (++filesRead === files.length) {
-                resolve(errors);
+                resolve(lintErrors);
               }
             });
           });

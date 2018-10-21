@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run compile && npm run lint",
     "compile": "tsc",
-    "lint": "node bin/html-linter --config html-linter.json",
+    "run": "node bin/html-linter --config html-linter.json",
     "prepublish": "npm run compile"
   },
   "keywords": [
