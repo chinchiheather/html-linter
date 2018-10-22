@@ -1,5 +1,4 @@
 export class AttrQuotes {
-
   static validate(attr: string, quotes: 'single' | 'double'): boolean {
     const quoteVal = quotes === 'single' ? `'` : `"`;
     const split = attr.split('=');

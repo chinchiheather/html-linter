@@ -23,14 +23,22 @@ export class Attributes {
         const attrMatches = line.match(attrRegex);
         if (attrMatches) {
           attrMatches.forEach(attrMatch => {
-            if (config.whitespace != null && !AttrWhitespace.validate(attrMatch, config.whitespace)) {
+            if (
+              config.whitespace != null &&
+              !AttrWhitespace.validate(attrMatch, config.whitespace)
+            ) {
               errors.push({
                 line: idx,
                 column: 0, // todo: find column
-                message: `Attributes should have ${config.whitespace} whitespace around '=' character`
+                message: `Attributes should have ${
+                  config.whitespace
+                } whitespace around '=' character`
               });
             }
-            if (config.quotes && !AttrQuotes.validate(attrMatch, config.quotes)) {
+            if (
+              config.quotes &&
+              !AttrQuotes.validate(attrMatch, config.quotes)
+            ) {
               errors.push({
                 line: idx,
                 column: 0, // todo: find column

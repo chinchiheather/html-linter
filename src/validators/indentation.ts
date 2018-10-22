@@ -17,11 +17,16 @@ export class Indentation {
         const startIdx = line.search(/\S/);
         const diff = Math.abs(prevStartIdx - startIdx);
         const whitespaceStr = line.substring(0, startIdx);
-        if (diff !== config.number && diff !== 0 || !whitespaceRegex.test(whitespaceStr)) {
+        if (
+          (diff !== config.number && diff !== 0) ||
+          !whitespaceRegex.test(whitespaceStr)
+        ) {
           errors.push({
             line: idx,
             column: startIdx,
-            message: `File should use ${config.number} ${config.char} indentation`
+            message: `File should use ${config.number} ${
+              config.char
+            } indentation`
           });
         }
         prevStartIdx = startIdx;

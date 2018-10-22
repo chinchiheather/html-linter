@@ -26,7 +26,7 @@ You need to pass in a json configuration file that specifies the rules you want 
 Any properties not present in this file will not be checked  
 See the [example config file](https://github.com/chinchiheather/html-linter/blob/master/html-linter.json)  
 
-```json
+```js
 files: string[];                      // array of files to check, can use glob patterns
 indentation: {
   char: 'space' | 'tab';              // character indentation should use

@@ -9,12 +9,12 @@ const program = commander
   .version('1.0.0')
   .option('--config [filePath]', 'config file')
   .arguments('[fileList...]')
-  .action((args: string[]) => fileList = args.length > 0 ? args : undefined)
+  .action((args: string[]) => (fileList = args.length > 0 ? args : undefined))
   .parse(process.argv);
 
 const configFilePath = program.config;
 if (!configFilePath) {
-  onError('Need to provide html-linter config file');
+  onError('config file is required');
 } else {
   fs.readFile(configFilePath, (fileError, data) => {
     if (fileError) {
@@ -30,14 +30,13 @@ if (!configFilePath) {
           }
         })
         .catch(lintError => {
-          onError(chalk.red(lintError.toString()));
+          onError(lintError.toString());
         });
     }
   });
 }
 
 function onError(error: string) {
-  Logger.log(chalk.red(error));
+  Logger.logHelp(error);
   process.exit(1);
 }
-

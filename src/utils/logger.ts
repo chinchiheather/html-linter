@@ -27,8 +27,11 @@ export default class Logger {
       .map(validation => validation.message.length)
       .reduce(findLargestReducer, 0);
 
-    validationErrors.forEach((validation) => {
-      const lineText = this.padString(`${validation.line}:${validation.column}`, longestLineChars);
+    validationErrors.forEach(validation => {
+      const lineText = this.padString(
+        `${validation.line}:${validation.column}`,
+        longestLineChars
+      );
       const line = chalk.gray(lineText);
       const errorTxt = this.padString(validation.message, longestMsgChars);
       const error = chalk.white(errorTxt);
@@ -39,14 +42,38 @@ export default class Logger {
   }
 
   /**
-  * If string's length is less than longest, appends spaces until it reaches the
-  * same length
-  */
+   * Logs error message followed by instructions on how to use html-linter
+   */
+  static logHelp(message?: string) {
+    if (message) {
+      this.log(chalk.red(message));
+    }
+
+    this.log(
+      chalk.gray(`
+Usage:
+  html-linter [config filepath] [files]
+
+[config filepath]
+path relative to your project root where your html-linter config file is located
+
+[files]: (optional)
+comma separated list of files or file patterns to lint (glob patterns are supported)
+    `)
+    );
+  }
+
+  /**
+   * If string's length is less than longest, appends spaces until it reaches the
+   * same length
+   */
   private static padString(string: string, longest: number) {
     if (string.length < longest) {
       Array(longest - string.length)
         .fill(null)
-        .forEach(() => { string += ' '; });
+        .forEach(() => {
+          string += ' ';
+        });
     }
     return string;
   }

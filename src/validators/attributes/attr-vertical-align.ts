@@ -1,5 +1,4 @@
 export class AttrVerticalAlign {
-
   static getIndentation(line: string): number {
     const tagRegex = /<[a-zA-Z0-9-]+\s/;
     if (tagRegex.test(line)) {
