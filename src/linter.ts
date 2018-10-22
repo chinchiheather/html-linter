@@ -10,7 +10,6 @@ import chalk from 'chalk';
 export class Linter {
   static lint(config: HtmlLinterConfig, fileList: string[]): Promise<number> {
     return new Promise((resolve, reject) => {
-      const errors: string[] = [];
       const filePaths = fileList || config.files;
       if (!Array.isArray(filePaths)) {
         reject('files must be an array of file paths to lint (glob patterns are allowed)');
@@ -36,23 +35,23 @@ export class Linter {
 
   private static checkFile(filePath: string, config: HtmlLinterConfig) {
     return new Promise((resolve) => {
-      glob(filePath, (error: Error, files: string[]) => {
-        if (error) {
+      glob(filePath, (globError: Error, files: string[]) => {
+        if (globError) {
           Logger.logResults(filePath, [{
             line: 0,
             column: 0,
-            message: error.toString()
+            message: globError.toString()
           }]);
         } else {
           let filesRead = 0;
           let lintErrors = 0;
           files.forEach(file => {
-            fs.readFile(file, (error, data) => {
-              if (error) {
+            fs.readFile(file, (fileError, data) => {
+              if (fileError) {
                 Logger.logResults(file, [{
                   line: 0,
                   column: 0,
-                  message: error.toString()
+                  message: fileError.toString()
                 }]);
               } else {
                 const errors: Validation[] = [];

@@ -16,8 +16,8 @@ const configFilePath = program.config;
 if (!configFilePath) {
   onError('Need to provide html-linter config file');
 } else {
-  fs.readFile(configFilePath, (error, data) => {
-    if (error) {
+  fs.readFile(configFilePath, (fileError, data) => {
+    if (fileError) {
       onError(`Error loading config file ${configFilePath}`);
     } else {
       const configJson = JSON.parse(data.toString());
@@ -29,8 +29,8 @@ if (!configFilePath) {
             process.exit(1);
           }
         })
-        .catch(error => {
-          onError(chalk.red(error.toString()));
+        .catch(lintError => {
+          onError(chalk.red(lintError.toString()));
         });
     }
   });

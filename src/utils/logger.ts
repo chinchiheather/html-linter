@@ -36,7 +36,7 @@ export default class Logger {
       this.log(`  ${line}  ${error}`);
     });
     this.log('\n');
-  };
+  }
 
   /**
   * If string's length is less than longest, appends spaces until it reaches the
@@ -49,5 +49,5 @@ export default class Logger {
         .forEach(() => { string += ' '; });
     }
     return string;
-  };
+  }
 }

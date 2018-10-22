@@ -12,7 +12,7 @@ export class Indentation {
 
     let prevStartIdx = 0;
     lines.forEach((line: string, idx: number) => {
-      let tagIdx = line.search(/^\s*</);
+      const tagIdx = line.search(/^\s*</);
       if (tagIdx !== -1) {
         const startIdx = line.search(/\S/);
         const diff = Math.abs(prevStartIdx - startIdx);
