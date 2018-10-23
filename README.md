@@ -2,35 +2,33 @@
 A simple linter to check the formatting of the html files in your project  
 Designed to be similar to how tslint and sass-lint work unlike other html linters which load urls and check the validity of the html page
 
-## Usage
-Either
-```
+![example](https://chinchiheather.github.io/html-linter/img/example.png)
+
+## Setup
+Install globally to run from the command line:
+```bash
+# npm
 npm install --global html-linter
-html-linter --config path-to-html-linter-config.json
+# yarn
+yarn global add html-linter
 ```
-Or
-```
+
+Install locally to run using an npm script:
+```bash
+# npm
 npm install --save-dev html-linter
-
-// add a script in your package.json
-"scripts": {
-  "lint:html": "html-linter --config path-to-html-linter-config.json"
-}
-```
-The --config flag is required and should be the path to the configuration file for html-linter
-
-If you want to specify the files to lint in the command line, pass these as arguments and they will override the files property in the config file
-```
-html-linter --config path-to-html-linter-config.json file1.html dir/**/*.html
+#  yarn
+yarn add --dev html-linter
 ```
 
+Create a json configuration file
 
 ## Configuration
 You need to pass in a json configuration file that specifies the rules you want to enforce  
 Any properties not present in this file will not be checked  
 See the [example config file](https://github.com/chinchiheather/html-linter/blob/master/html-linter.json)  
 
-```
+```js
 files: string[];                      // array of files to check, can use glob patterns
 indentation: {
   char: 'space' | 'tab';              // character indentation should use
@@ -42,3 +40,21 @@ attributes: {
   vertical-align: boolean;            // whether attributes should align vertically
 };
 ```
+
+## Usage
+```bash
+html-linter --config [config filepath] [files]
+```
+
+The `--config` flag is **required** and should be the path to the json configuration file for html-linter
+
+The file list is optional and can be used to override the files property in the config file
+
+### Example
+
+```bash
+html-linter --config ./html-linter.json src/**/*.html
+
+
+
+

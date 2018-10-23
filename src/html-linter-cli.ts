@@ -1,43 +1,42 @@
-import * as colors from 'colors';
+import chalk from 'chalk';
 import { Linter } from './linter';
 import * as commander from 'commander';
 import * as fs from 'fs';
+import Logger from './utils/logger';
 
 let fileList: string[];
 const program = commander
   .version('1.0.0')
   .option('--config [filePath]', 'config file')
   .arguments('[fileList...]')
-  .action((args: string[]) => fileList = args.length > 0 ? args : undefined)
+  .action((args: string[]) => (fileList = args.length > 0 ? args : undefined))
   .parse(process.argv);
 
 const configFilePath = program.config;
 if (!configFilePath) {
-  onError('Need to provide html-linter config file');
+  onError('config file is required');
 } else {
-  fs.readFile(configFilePath, (error, data) => {
-    if (error) {
+  fs.readFile(configFilePath, (fileError, data) => {
+    if (fileError) {
       onError(`Error loading config file ${configFilePath}`);
     } else {
       const configJson = JSON.parse(data.toString());
       Linter.lint(configJson, fileList)
-        .then(errors => {
-          if (errors.length === 0) {
-            console.log(colors.green('All files pass linting'));
+        .then(numErrors => {
+          if (numErrors === 0) {
+            process.exit(0);
           } else {
-            errors.forEach(errorMsg => console.log(errorMsg));
             process.exit(1);
           }
         })
-        .catch(error => {
-          onError(colors.red(error.toString()));
+        .catch(lintError => {
+          onError(lintError.toString());
         });
     }
   });
 }
 
 function onError(error: string) {
-  console.log(colors.red(error));
+  Logger.logHelp(error);
   process.exit(1);
 }
-

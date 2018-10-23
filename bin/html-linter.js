@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../lib/html-linter-cli');
+require('../dist/html-linter-cli');
