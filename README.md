@@ -2,7 +2,7 @@
 A simple linter to check the formatting of the html files in your project  
 Designed to be similar to how tslint and sass-lint work unlike other html linters which load urls and check the validity of the html page
 
-![example](https://chinchiheather.github.io/html-linter/img/example.png)
+![example](https://chinchiheather.github.io/images/html-linter/img/example.png)
 
 ## Setup
 Install globally to run from the command line:
@@ -54,7 +54,4 @@ The file list is optional and can be used to override the files property in the 
 
 ```bash
 html-linter --config ./html-linter.json src/**/*.html
-
-
-
-
+```
